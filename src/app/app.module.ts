@@ -8,10 +8,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 import { IssueFormComponent } from './issue-form/issue-form.component';
 import { RoutingModule } from './routing/routing.module';
+import { GlinkComponent } from './glink/glink.component';
+import { StatusFilterComponent } from './status-filter/status-filter.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { RoutingModule } from './routing/routing.module';
     MyComponentComponent,
     IssueListComponent,
     IssueDetailComponent,
-    IssueFormComponent
+    IssueFormComponent,
+    GlinkComponent,
+    StatusFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +33,7 @@ import { RoutingModule } from './routing/routing.module';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
+    MatButtonToggleModule,
     RoutingModule
   ],
   providers: [],
