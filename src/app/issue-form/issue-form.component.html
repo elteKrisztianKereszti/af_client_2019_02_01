@@ -1,1 +1,58 @@
-<p>issue-form works!</p>
+<form (submit)="onSubmit(issueForm)"
+      #issueForm="ngForm">
+  <div class="form-group">
+    <mat-form-field>
+      <input name="title"
+             [(ngModel)]="model.title"
+             matInput
+             type="text"
+             aria-describedby="titleHelp"
+             placeholder="Enter title"
+             required
+             #title="ngModel">
+      <mat-error *ngIf="title.invalid && (title.dirty || title.touched) && title.errors.required">
+        Title is required!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input name="location"
+             [(ngModel)]="model.place"
+             matInput
+             type="text"
+             aria-describedby="locationHelp"
+             placeholder="Enter location"
+             required
+             pattern="PC\d+"
+             #place="ngModel">
+      <mat-error *ngIf="place.invalid && (place.dirty || place.touched) && place.errors.required">
+        Location is required!
+      </mat-error>
+      <mat-error *ngIf="place.invalid && (place.dirty || place.touched) && place.errors.pattern">
+        Location must start with PC...!
+      </mat-error>
+
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="descriptionHelp" class="form-text text-muted">The error details</small> -->
+    <mat-form-field>
+
+      <textarea name="description"
+                [(ngModel)]="model.description"
+                matInput
+                aria-describedby="descriptionHelp"
+                placeholder="Enter issue details"></textarea>
+    </mat-form-field>
+  </div>
+
+  <button [disabled]="!issueForm.valid"
+          type="submit"
+          mat-raised-button
+          color="primary">Save issue</button>
+</form>
