@@ -9,15 +9,15 @@ import { IssueService } from '../issue.service';
   styleUrls: ['./issue-detail.component.css']
 })
 export class IssueDetailComponent implements OnInit {
-  issue: Issue = null;
+  public issue: Issue = null;
 
   constructor(
     private route: ActivatedRoute,
     private issueService: IssueService
   ) { }
 
-  ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.issue = this.issueService.getIssue(id);
+    this.issue = await this.issueService.getIssue(id);
   }
 }

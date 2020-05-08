@@ -16,11 +16,11 @@ export class IssueListComponent implements OnInit {
   constructor(
     private issueService: IssueService
   ) {
-    this.issues = issueService.getIssues();
   }
 
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     this.selectedStatus = '';
+    this.issues = await this.issueService.getIssues();
     this.filter();
   }
 
@@ -33,21 +33,26 @@ export class IssueListComponent implements OnInit {
     this.selectedIssue = issue;
   }
 
-  public onFormSubmit(issue: Issue): void {
+  public async onFormSubmit(issue: Issue): Promise<void> {
     if (issue.id > 0) {
-      this.issueService.updateIssue(issue);
+      await this.issueService.updateIssue(issue);
+      this.issues = await this.issueService.getIssues();
     } else {
-      this.issueService.createIssue(issue);
+      await this.issueService.createIssue(issue);
+      this.issues = await this.issueService.getIssues();
     }
     this.selectedIssue = null;
+    this.filter();
   }
 
   public onNewClick(): void {
     this.selectedIssue = new Issue();
   }
 
-  public onDeleteClick(id: number) {
-    this.issueService.deleteIssue(id);
+  public async onDeleteClick(id: number): Promise<void> {
+    await this.issueService.deleteIssue(id);
+    this.issues = await this.issueService.getIssues();
+    this.filter();
   }
 
   private filter(): void {

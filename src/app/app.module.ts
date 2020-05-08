@@ -18,6 +18,7 @@ import { RoutingModule } from './routing/routing.module';
 import { GlinkComponent } from './glink/glink.component';
 import { StatusFilterComponent } from './status-filter/status-filter.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     RoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
