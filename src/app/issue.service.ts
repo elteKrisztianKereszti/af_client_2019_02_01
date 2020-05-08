@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Issue } from './issue';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic dXNlcjpwYXNzd29yZA==', // admin/password
-  })
-};
+import { HttpClient } from '@angular/common/http';
+import { httpOptions } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
