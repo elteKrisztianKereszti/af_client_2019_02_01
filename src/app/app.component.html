@@ -18,13 +18,15 @@
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
-<mat-menu *ngIf="authService.isLoggedIn" xPosition="before" #menu="matMenu">
-  <button mat-menu-item routerLink="/issues">My issues</button>
-  <button mat-menu-item routerLink="/issues/new">New issues</button>
-  <button mat-menu-item (click)="logout()">Logout</button>
-</mat-menu>
-<mat-menu *ngIf="authService.isLoggedIn" xPosition="before" #menu="matMenu">
-  <button mat-button routerLink="/login">Login</button>
+<mat-menu xPosition="before" #menu="matMenu">
+  <div *ngIf="authService.isLoggedIn">
+    <button mat-menu-item routerLink="/issues">My issues</button>
+    <button mat-menu-item routerLink="/issues/new">New issues</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="!authService.isLoggedIn">
+    <button mat-button routerLink="/login">Login</button>
+  </div>
 </mat-menu>
 
 <router-outlet></router-outlet>
