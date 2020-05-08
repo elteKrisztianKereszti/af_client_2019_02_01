@@ -11,12 +11,20 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     if (this.authService.isLoggedIn) {
-      return true;
-    }
+      if (!next.data.roles) {
+        return true;
+      }
 
+      if (next.data.roles.includes(this.authService.user.role)) {
+        return true;
+      } else {
+        console.log('No permission');
+        return false;
+      }
+    }
     this.authService.redirectUrl = state.url;
     this.router.navigate(['/login']);
     return false;

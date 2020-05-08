@@ -20,7 +20,11 @@ const routes: Routes = [
   },
   {
     path: 'issues/new',
-    component: IssueFormComponent
+    component: IssueFormComponent,
+    canActivate: [ AuthGuard ],
+    data: {
+      roles: ['ROLE_ADMIN']
+    }
   },
   {
     path: 'issues/:id',
