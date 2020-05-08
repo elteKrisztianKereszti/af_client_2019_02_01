@@ -5,22 +5,26 @@
   </button>
 
   <span class="fill-remaining-space" fxHide="false" fxHide.gt-sm></span>
-  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button mat-button href="/issues" routerLink="/issues">My issues</button>
-    <button mat-button href="/issues/add" routerLink="/issues/new">New issues</button>
+  <div *ngIf="authService.isLoggedIn">
+    <button mat-button routerLink="/issues">My issues</button>
+    <button mat-button routerLink="/issues/new">New issues</button>
+    <span>Hello, {{authService.user.username}}!</span>
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="!authService.isLoggedIn">
+    <button mat-button routerLink="/login">Login</button>
   </div>
   <button mat-icon-button [matMenuTriggerFor]="menu" fxHide="false" fxHide.gt-sm>
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
-<mat-menu xPosition="before" #menu="matMenu">
-  <button mat-menu-item href="/issues">My issues</button>
-  <button mat-menu-item href="/issues/add">New issues</button>
+<mat-menu *ngIf="authService.isLoggedIn" xPosition="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/issues">My issues</button>
+  <button mat-menu-item routerLink="/issues/new">New issues</button>
+  <button mat-menu-item (click)="logout()">Logout</button>
 </mat-menu>
-
-
-<glink searchField="Alma"></glink>
-
-<my-component></my-component>
+<mat-menu *ngIf="authService.isLoggedIn" xPosition="before" #menu="matMenu">
+  <button mat-button routerLink="/login">Login</button>
+</mat-menu>
 
 <router-outlet></router-outlet>
